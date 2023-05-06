@@ -8,9 +8,7 @@ export function renderPostsPageComponent({ appEl, getListPosts }) {
 	let postsHTML = posts
 		.map((post, index) => getListPostsInstapro(post, index)).join("");
 
-	console.log(appEl);
 	appEl.innerHTML = postsHTML;
-	console.log(appEl);
 
 	renderHeaderComponent({
 		element: document.querySelector(".header-container"),
