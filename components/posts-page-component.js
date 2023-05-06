@@ -3,7 +3,7 @@ import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
 import { getListPostsInstapro } from "../gets.js";
 
-export function renderPostsPageComponent({ appEl, getListPosts }) {
+export function renderPostsPageComponent({ appEl }) {
 
 	let postsHTML = posts
 		.map((post, index) => getListPostsInstapro(post, index)).join("");
