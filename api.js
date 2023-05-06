@@ -4,17 +4,20 @@ const personalKey = "prod";
 const baseHost = "https://webdev-hw-api.vercel.app";
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
 
+// нужно будет убрать токен из аргументов этого феч
 export function getPosts({ token }) {
   return fetch(postsHost, {
     method: "GET",
-    headers: {
-      Authorization: token,
-    },
+	 // при первоначальном запросе нам токен авторизации не требуется
+   //  headers: {
+   //    Authorization: token,
+   //  },
   })
     .then((response) => {
-      if (response.status === 401) {
-        throw new Error("Нет авторизации");
-      }
+		// для чего сценарий без авторизации когда посты показываются всегда
+      // if (response.status === 401) {
+      //   throw new Error("Нет авторизации");
+      // }
 
       return response.json();
     })
