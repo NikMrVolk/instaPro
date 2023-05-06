@@ -16,6 +16,7 @@ export function renderPostsPageComponent({ appEl }) {
 
 	for (let userEl of document.querySelectorAll(".post-header")) {
 		userEl.addEventListener("click", () => {
+
 			goToPage(USER_POSTS_PAGE, {
 				userId: userEl.dataset.userId,
 			});
@@ -26,7 +27,7 @@ export function renderPostsPageComponent({ appEl }) {
 
 
 
-	/**
-	 * TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
-	 * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
-	 */
+/**
+ * TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
+ * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
+ */

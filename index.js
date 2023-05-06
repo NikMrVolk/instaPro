@@ -1,4 +1,4 @@
-import { getPosts, addNewPosts } from "./api.js";
+import { getPosts, addNewPosts, getUserPosts } from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";
 import { renderAuthPageComponent } from "./components/auth-page-component.js";
 import {
@@ -15,6 +15,8 @@ import {
 	removeUserFromLocalStorage,
 	saveUserToLocalStorage,
 } from "./helpers.js";
+import { getListPostsInstapro, getUserListInstapro } from "./gets.js"
+import { renderHeaderComponent } from "./components/header-component.js";
 
 export let user = getUserFromLocalStorage();
 export let page = null;
@@ -67,10 +69,21 @@ export const goToPage = (newPage, data) => {
 		}
 
 		if (newPage === USER_POSTS_PAGE) {
-			// TODO: реализовать получение постов юзера из API
-			console.log("Открываю страницу пользователя: ", data.userId);
-			page = USER_POSTS_PAGE;
 			posts = [];
+			getUserPosts(data.userId)
+				.then((response) => {
+					posts = response;
+					renderApp();
+					renderHeaderComponent({
+						element: document.querySelector(".header-container"),
+					});
+					return posts;
+				})
+				.catch((error) => {
+					console.log(error);
+					goToPage(USER_POSTS_PAGE);
+				})
+			page = USER_POSTS_PAGE;
 			return renderApp();
 		}
 
@@ -113,16 +126,16 @@ const renderApp = () => {
 				addNewPosts({
 					token: getToken(),
 					description,
-					imageUrl,	
+					imageUrl,
 				})
-				.then((response) => {
-					goToPage(POSTS_PAGE);
-					return response;
-				})
-				.catch((error) => {
-					console.error(error);
-					goToPage(ADD_POSTS_PAGE);
-				});
+					.then((response) => {
+						goToPage(POSTS_PAGE);
+						return response;
+					})
+					.catch((error) => {
+						console.error(error);
+						goToPage(ADD_POSTS_PAGE);
+					});
 			},
 		});
 	}
@@ -133,9 +146,10 @@ const renderApp = () => {
 		});
 	}
 
-	if (page === USER_POSTS_PAGE) {
-		// TODO: реализовать страницу фотографию пользвателя
-		appEl.innerHTML = "Здесь будет страница фотографий пользователя";
+	if (page === USER_POSTS_PAGE && posts.length > 0) {
+
+		appEl.innerHTML = posts
+			.map((post, index) => getUserListInstapro(post, index)).join("");
 		return;
 	}
 };

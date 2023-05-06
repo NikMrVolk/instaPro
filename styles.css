@@ -54,6 +54,13 @@
   cursor: pointer;
 }
 
+.post-user-header{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: 12px;
+}
+
 .post-header__user-image {
   width: 40px;
   height: 40px;

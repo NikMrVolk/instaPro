@@ -76,9 +76,9 @@ export function addNewPosts({ token, description, imageUrl }) {
 	return fetch(postsHost, {
 		method: "POST",
 		body: JSON.stringify({
-				description,
-				imageUrl,
-			}),
+			description,
+			imageUrl,
+		}),
 		headers: {
 			Authorization: token,
 		},
@@ -89,4 +89,20 @@ export function addNewPosts({ token, description, imageUrl }) {
 			}
 			return response.json();
 		})
+}
+
+export function getUserPosts( id ) {
+	return fetch(`${postsHost}/user-posts/${id}`, {
+		method: "GET",
+
+	})
+		.then((response) => {
+			if (response.status === 401) {
+				throw new Error("Нет авторизации");
+			}
+			return response.json();
+		})
+		.then((data) => {
+			return data.posts;
+		});
 }
