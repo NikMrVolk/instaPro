@@ -8,15 +8,9 @@ export function renderPostsPageComponent({ appEl, getListPosts }) {
 	let postsHTML = posts
 		.map((post, index) => getListPostsInstapro(post, index)).join("");
 
-	// TODO: реализовать рендер постов из api
-	// console.log("Актуальный список постов:", posts);
-
-	/**
-	 * TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
-	 * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
-	 */
-
+	console.log(appEl);
 	appEl.innerHTML = postsHTML;
+	console.log(appEl);
 
 	renderHeaderComponent({
 		element: document.querySelector(".header-container"),
@@ -31,3 +25,10 @@ export function renderPostsPageComponent({ appEl, getListPosts }) {
 	}
 }
 
+
+
+
+	/**
+	 * TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
+	 * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
+	 */

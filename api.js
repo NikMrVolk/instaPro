@@ -15,9 +15,9 @@ export function getPosts({ token }) {
   })
     .then((response) => {
 		// для чего сценарий без авторизации когда посты показываются всегда
-      // if (response.status === 401) {
-      //   throw new Error("Нет авторизации");
-      // }
+      if (response.status === 401) {
+        throw new Error("Нет авторизации");
+      }
 
       return response.json();
     })
