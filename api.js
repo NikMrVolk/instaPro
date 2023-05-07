@@ -91,7 +91,7 @@ export function addNewPosts({ token, description, imageUrl }) {
 		})
 }
 
-export function getUserPosts( id ) {
+export function getUserPosts(id) {
 	return fetch(`${postsHost}/user-posts/${id}`, {
 		method: "GET",
 
@@ -104,5 +104,30 @@ export function getUserPosts( id ) {
 		})
 		.then((data) => {
 			return data.posts;
+		});
+}
+
+export function addLike({ token, id }) {
+	return fetch(postsHost + "/" + id + "/like", {
+		method: "POST",
+		headers: {
+			Authorization: token,
+		},
+	})
+		.then((response) => {
+			return response.json();
+		});
+}
+
+
+export function removeLike({ token, id }) {
+	return fetch(postsHost + "/" + id + "/dislike", {
+		method: "POST",
+		headers: {
+			Authorization: token,
+		},
+	})
+		.then((response) => {
+			return response.json();
 		});
 }
