@@ -1,5 +1,13 @@
-export const getListPostsInstapro = (post, index) => {
-	const likedUserNames = post.likes.map(obj => obj.name);
+import { user } from "./index.js";
+
+export const getListPostsInstapro = (post) => {
+	const likedUserNames = post.likes.map(post => post.name);
+	const likedUserId = post.likes.map(post => post.id)
+
+	if (user && likedUserId.includes(user._id)) {
+		post.isLiked = true;
+	}
+
 	return `
 		<div class="page-container">
 		<div class="header-container"></div>
@@ -18,7 +26,7 @@ export const getListPostsInstapro = (post, index) => {
 						</button>
 						<p class="post-likes-text">
 							Нравится: <strong>${likedUserNames.length ? likedUserNames[0] : 0}</strong>
-							${likedUserNames.length > 1 ? `и <strong>еще ${likedUserNames.length - 1}</strong>`: ''}
+							${likedUserNames.length > 1 ? `и <strong>еще ${likedUserNames.length - 1}</strong>` : ''}
 						</p>
 					</div>
 					<p class="post-text">
@@ -34,6 +42,14 @@ export const getListPostsInstapro = (post, index) => {
 }
 
 export const getUserListInstapro = (post, index) => {
+	
+	const likedUserNames = post.likes.map(post => post.name);
+	const likedUserId = post.likes.map(post => post.id)
+
+	if (user && likedUserId.includes(user._id)) {
+		post.isLiked = true;
+	}
+
 	return `
 		<div class="page-container">
 		<div class="header-container"></div>
@@ -48,11 +64,11 @@ export const getUserListInstapro = (post, index) => {
 					</div>
 					<div class="post-likes">
 						<button data-post-id="${post.id}" class="like-button">
-							${post.isLiked ? `<img src="./assets/images/like-active.svg"></img>`
-							: `<img src="./assets/images/like-not-active.svg"></img>`}
+						<img src="./assets/images/${post.isLiked ? `like-active` : `like-not-active`}.svg">
 						</button>
 						<p class="post-likes-text">
-							Нравится: <strong>2</strong>
+							Нравится: <strong>${likedUserNames.length ? likedUserNames[0] : 0}</strong>
+							${likedUserNames.length > 1 ? `и <strong>еще ${likedUserNames.length - 1}</strong>` : ''}
 						</p>
 					</div>
 					<p class="post-text">
@@ -66,8 +82,3 @@ export const getUserListInstapro = (post, index) => {
 			</ul>
 		</div>`
 }
-
-// export const getHeaderUserPosts = (post, index) => {
-// 	return `
-
-// }

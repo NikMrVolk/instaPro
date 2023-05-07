@@ -8,15 +8,16 @@ import {
 	POSTS_PAGE,
 	USER_POSTS_PAGE,
 } from "./routes.js";
-import { renderPostsPageComponent, workWithButtonLike } from "./components/posts-page-component.js";
+import { renderPostsPageComponent } from "./components/posts-page-component.js";
 import { renderLoadingPageComponent } from "./components/loading-page-component.js";
 import {
 	getUserFromLocalStorage,
 	removeUserFromLocalStorage,
 	saveUserToLocalStorage,
 } from "./helpers.js";
-import { getListPostsInstapro, getUserListInstapro } from "./gets.js"
+import { getUserListInstapro } from "./gets.js"
 import { renderHeaderComponent } from "./components/header-component.js";
+import { workWithButtonLike } from "./components/likes-component.js"
 
 export let user = getUserFromLocalStorage();
 export let page = null;
@@ -149,7 +150,7 @@ const renderApp = () => {
 	if (page === USER_POSTS_PAGE && posts.length > 0) {
 
 		appEl.innerHTML = posts
-			.map((post, index) => getListPostsInstapro(post, index)).join("");
+			.map((post, index) => getUserListInstapro(post, index)).join("");
 			workWithButtonLike();
 		return;
 	}
