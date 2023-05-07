@@ -8,7 +8,7 @@ import {
 	POSTS_PAGE,
 	USER_POSTS_PAGE,
 } from "./routes.js";
-import { renderPostsPageComponent } from "./components/posts-page-component.js";
+import { renderPostsPageComponent, workWithButtonLike } from "./components/posts-page-component.js";
 import { renderLoadingPageComponent } from "./components/loading-page-component.js";
 import {
 	getUserFromLocalStorage,
@@ -149,7 +149,8 @@ const renderApp = () => {
 	if (page === USER_POSTS_PAGE && posts.length > 0) {
 
 		appEl.innerHTML = posts
-			.map((post, index) => getUserListInstapro(post, index)).join("");
+			.map((post, index) => getListPostsInstapro(post, index)).join("");
+			workWithButtonLike();
 		return;
 	}
 };

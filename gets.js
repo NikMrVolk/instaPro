@@ -1,4 +1,5 @@
 export const getListPostsInstapro = (post, index) => {
+	const likedUserNames = post.likes.map(obj => obj.name);
 	return `
 		<div class="page-container">
 		<div class="header-container"></div>
@@ -13,11 +14,11 @@ export const getListPostsInstapro = (post, index) => {
 					</div>
 					<div class="post-likes">
 						<button data-post-id="${post.id}" class="like-button">
-							${post.isLiked ? `<img src="./assets/images/like-active.svg"></img>`
-							: `<img src="./assets/images/like-not-active.svg"></img>`}
+						<img src="./assets/images/${post.isLiked ? `like-active` : `like-not-active`}.svg">
 						</button>
 						<p class="post-likes-text">
-							Нравится: <strong>2</strong>
+							Нравится: <strong>${likedUserNames.length ? likedUserNames[0] : 0}</strong>
+							${likedUserNames.length > 1 ? `и <strong>еще ${likedUserNames.length - 1}</strong>`: ''}
 						</p>
 					</div>
 					<p class="post-text">

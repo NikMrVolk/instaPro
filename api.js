@@ -119,8 +119,7 @@ export function addLike({ token, id }) {
 		});
 }
 
-
-export function removeLike({ token, id }) {
+export function deleteLike({ token, id }) {
 	return fetch(postsHost + "/" + id + "/dislike", {
 		method: "POST",
 		headers: {
