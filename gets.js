@@ -1,4 +1,5 @@
 import { user } from "./index.js";
+import { formatDistanceToNowPost } from "./helpers.js"
 
 export const getListPostsInstapro = (post) => {
 	const likedUserNames = post.likes.map(post => post.name);
@@ -34,7 +35,7 @@ export const getListPostsInstapro = (post) => {
 						${post.description}
 					</p>
 					<p class="post-date">
-						${post.createdAt}
+					${formatDistanceToNowPost(new Date(post.createdAt))}
 					</p>
 				</li>
 			</ul>
