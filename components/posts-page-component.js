@@ -7,7 +7,7 @@ import { workWithButtonLike } from "./likes-component.js";
 export function renderPostsPageComponent({ appEl }) {
 	let postsHTML = posts
 		.map((post, index) => getListPostsInstapro(post, index)).join("");
-
+	console.log(appEl);
 	appEl.innerHTML = postsHTML;
 
 	renderHeaderComponent({
@@ -24,11 +24,3 @@ export function renderPostsPageComponent({ appEl }) {
 	}
 	workWithButtonLike();
 }
-
-
-
-
-/**
- * TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
- * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
- */

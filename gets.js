@@ -32,7 +32,7 @@ export const getListPostsInstapro = (post) => {
 					</div>
 					<p class="post-text">
 						<span class="user-name">${post.user.name}</span>
-						${post.description}
+						${post.description.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;")}
 					</p>
 					<p class="post-date">
 					${formatDistanceToNowPost(new Date(post.createdAt))}
@@ -74,10 +74,10 @@ export const getUserListInstapro = (post, index) => {
 					</div>
 					<p class="post-text">
 						<span class="user-name">${post.user.name}</span>
-						${post.description}
+						${post.description.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;")}
 					</p>
 					<p class="post-date">
-						${post.createdAt}
+					${formatDistanceToNowPost(new Date(post.createdAt))}
 					</p>
 				</li>
 			</ul>
